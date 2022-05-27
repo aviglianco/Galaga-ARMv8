@@ -1,4 +1,3 @@
-
 .equ SCREEN_WIDTH, 		640
 .equ SCREEN_HEIGH, 		480
 .equ BITS_PER_PIXEL,  	32
@@ -145,7 +144,13 @@ path:
 		add x4,x4,1
 		cbnz x2,path
 
-		
+
+
+
+
+
+
+
 /*
 	Para ubicar nuestro 'pincel', usamos la fórmula:
 	pincel (guardado en registro) = direc.base.frame + 4*(x+(y*640))
