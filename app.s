@@ -69,12 +69,12 @@ floor:
 /* Pintamos las estrellas en el cielo */
 		mov x3, 0x0
 		mov x4,0x0
-		add x0, xzr, x20
+		//add x0, xzr, x20
 		mov x2, half_height
 stars:
 		madd x5,x4,x9,x3 //x5 = x9 +(x4*x9) calculo el inicio de la linea del cuadrado
 		lsl x5,x5,2 //multiplico por 4
-		add x0,x20,x5 //x0 = direc.base.frame + 4*(x+(y*640)) inicio demi nueva linea
+		add x0,x20,x5 //x0 = direc.base.frame + 4*(x+(y*640)) inicio de mi nueva linea
 		mov x1, SCREEN_WIDTH
 
 	loop_e2:
@@ -90,7 +90,6 @@ stars:
 /* Pintamos la estructura de la casa */
 		mov x3, 0x50
 		mov x4,0xF0
-		add x0, xzr, x20
 		mov x2, 120
 house:
 		madd x5,x4,x9,x3
@@ -109,7 +108,6 @@ house:
 /* Pintamos el techo de la casa */
 		mov x3, 0x91
 		mov x4, 0xD0
-		add x0, x20, xzr
 		mov x2, 38
 		mov x6, 1
 ceiling:
@@ -129,9 +127,25 @@ ceiling:
 		cbnz x2,ceiling
 
 /* Pintamos el fondo del camino */
-
+		mov x3,0x8c
+		mov x4,0x168
+		mov x2,50
 path:
+		madd x5,x4,x9,x3
+		lsl x5,x5,2
+		add x0,x20,x5
+		mov x1,12
+	loop_p1:
+		stur w10,[x0]
+		add x0,x0,4
+		sub x1,x1,1
+		cbnz x1,loop_p1
+		sub x2,x2,1	
+		add x3,x3,1
+		add x4,x4,1
+		cbnz x2,path
 
+		
 /*
 	Para ubicar nuestro 'pincel', usamos la fórmula:
 	pincel (guardado en registro) = direc.base.frame + 4*(x+(y*640))
