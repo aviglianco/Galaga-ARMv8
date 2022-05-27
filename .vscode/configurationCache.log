@@ -1,1 +1,0 @@
-{"buildTargets":["all","app.o","clean","kernel8.img","run","runGDB","runQEMU","start.o"],"launchTargets":["/home/adolfo/Documents/lab-org2022>kernel8.elf()"],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
