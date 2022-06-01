@@ -1,11 +1,10 @@
 .ifndef graphics_s
-
+.include "data.s"
 /* 
     Este archivo contiene todas las funciones relacionadas con
     los gráficos que se realizan en el programa.
 */
 
-.include "data.s"
 
 /*
     Realiza los cálculos necesarios para generar un "puntero" al pixel deseado.
@@ -54,7 +53,50 @@ rectangulo:
     Dibuja un círculo en la pantalla.
 
     Parámetros:
-
+        x20 = color del circulo 
+        x2 = radio del circulo
+        x3 = posicion del centro en X
+        x4 = posicion del centro en y
     Retorno:
-
+        modifica:
+            x21 x22 x2 
 */
+circulo:
+            sub x21, x3,x2  // calcula la esquina izquierda (en x) del cuadrado a recorrer para pintar el circulo 
+            sub x22, x4,x2  // calcula la altura de la esquina izq(en y) para el cuadrado  
+            
+            mul x6,x2,x2 //radio al cuadrado
+            add x7,x2,x2 //contador ancho del cuadrado
+            add x8,x2,x2 //contador alto del cuadrado
+            b loop_c
+    movy:
+            add x22,x22,1 //aumento el y
+            sub x21,x3,x2 //vuelvo a setear x
+            sub x8,x8,1   //le quito uno a mi contador de eje y
+            add x7,x2,x2  //vuelvo a setear el ancho 
+            cbz x8, c_ret 
+            b loop_c
+    circle_l: 
+            mov x0,x21
+            mov x1,x22
+            BL pixel
+            stur w20,[x0]
+            add x21,x21,1 //me muevo al sig x
+            sub x7,x7,1  //actualizo contador del ancho
+            cbz x7, movy // si me pase de linea, reseteo al ancho de vuelta y aumento mi 'y' y vuelvo a setear x en el inicio de la linea
+    loop_c:
+            sub x14,x21,x3 //x-a
+            sub x15,x22,x4 //y-b
+            madd x14,x14,x14,xzr //(x-a)^2
+            madd x15,x15,x15,xzr //(y-b)^2
+            add x16,x14,x15 // (x- a)^2 + (y - b)^2
+            cmp x16,x6 // (x- a)^2 + (y - b)^2 <= r^2
+            B.LE circle_l //si pertenece al circulo pintamos
+            sub x7,x7,1
+            add x21,x21,1
+            cbnz x7,loop_c
+            cbz x7, movy
+c_ret:
+        BR LR
+
+.endif
