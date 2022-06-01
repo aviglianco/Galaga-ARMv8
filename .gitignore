@@ -1,5 +1,4 @@
-
-# C object files
+# Object files
 *.o
 
 # Assembler compiled files
@@ -8,7 +7,7 @@ kernel8.img
 kernel8.list
 
 # VS Code environment directory
-.vscode/*
-.vscode/*.log
+.vscode/
 
+# GDB generated file
 .gdb_history
