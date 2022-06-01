@@ -62,6 +62,9 @@ rectangulo:
             x21 x22 x2 
 */
 circulo:
+            sub sp,sp,8
+            stur lr,[sp]
+            //guardo la direccion de retorno
             sub x21, x3,x2  // calcula la esquina izquierda (en x) del cuadrado a recorrer para pintar el circulo 
             sub x22, x4,x2  // calcula la altura de la esquina izq(en y) para el cuadrado  
             
@@ -97,6 +100,7 @@ circulo:
             cbnz x7,loop_c
             cbz x7, movy
 c_ret:
+        ldur lr,[sp]
         BR LR
 
 .endif

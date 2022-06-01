@@ -1,4 +1,3 @@
-
 .ifndef data_s
 
 /*
@@ -10,11 +9,9 @@
 //delay: .dword 0xFFFFFF // Constante utilizada para generar el delay entre frames
 
 // Colores
+.equ white,         0xFFFFFF
 
-
-
-// Pantalla
-//.equ base_framebuffer 
+// Pantalla 
 .equ SCREEN_WIDTH, 		640
 .equ SCREEN_HEIGH, 		480
 .equ BITS_PER_PIXEL,  	32
