@@ -1,0 +1,14 @@
+
+# C object files
+*.o
+
+# Assembler compiled files
+kernel8.elf
+kernel8.img
+kernel8.list
+
+# VS Code environment directory
+.vscode/*
+.vscode/*.log
+
+.gdb_history
