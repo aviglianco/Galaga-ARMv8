@@ -10,7 +10,10 @@
 .globl main
 main:
 	// X0 contiene la direccion base del framebuffer
- 	mov x20, x0	// Save framebuffer base address to x20	
+	mov x26, SCREEN_HEIGH //  Guardamos la altura de la pantalla en x26
+	mov x25, SCREEN_WIDTH // Guardamos el ancho de la pantalla en x25
+ 	mov x27, x0
+
 	//---------------- CODE HERE ------------------------------------
 	
 /* 
@@ -73,7 +76,7 @@ floor:
 stars:
 		madd x5,x4,x9,x3 //x5 = x9 +(x4*x9) calculo el inicio de la linea del cuadrado
 		lsl x5,x5,2 //multiplico por 4
-		add x0,x20,x5 //x0 = direc.base.frame + 4*(x+(y*640)) inicio de mi nueva linea
+		add x0,x27,x5 //x0 = direc.base.frame + 4*(x+(y*640)) inicio de mi nueva linea
 		mov x1, SCREEN_WIDTH
 
 	loop_e2:
@@ -93,7 +96,7 @@ stars:
 house:
 		madd x5,x4,x9,x3
 		lsl x5,x5,2
-		add x0,x20,x5
+		add x0,x27,x5
 		mov x1,131
 	loop_h1:
 		stur w13,[x0]
@@ -112,7 +115,7 @@ house:
 ceiling:
 		madd x5,x4,x9,x3
 		lsl x5,x5,2
-		add x0,x20,x5
+		add x0,x27,x5
 		add x1, xzr, x6
 	loop_ceiling:
 		stur w14,[x0]
@@ -132,7 +135,7 @@ ceiling:
 path:
 		madd x5,x4,x9,x3
 		lsl x5,x5,2
-		add x0,x20,x5
+		add x0,x27,x5
 		mov x1,12
 	loop_p1:
 		stur w10,[x0]
@@ -144,62 +147,10 @@ path:
 		add x4,x4,1
 		cbnz x2,path
 
-
-
-
-
-
-
-
 /*
 	Para ubicar nuestro 'pincel', usamos la fórmula:
 	pincel (guardado en registro) = direc.base.frame + 4*(x+(y*640))
 */
-
-//guardo los (x,y) del frame donde voy a querer arrancar a dibujar
-/* 	mov x3, 0xaa //170
-	mov x4,0x5a  // 90
-	
-
-	mov x2, square_heigh //300
-square:
-	mov x0,x20 //guardo en x0 la direccion base del frame
-	madd x5,x4,x9,x3 //x5 = x9 +(x12*x13) calculo el inicio de la linea del cuadrado
-	lsl x5,x5,2 //multiplico por 4
-	add x0,x20,x5 //x0 = direc.base.frame + 4*(x+(y*640)) inicio demi nueva linea
-	mov x1, square_width //300
-loop4:
-	stur w11,[x0]
-	add x0,x0,4  //next pixel
-	sub x1,x1,1
-	cbnz x1,loop4
-	sub x2,x2,1
-	add x4,x4,1 //aumento mi'y' para calcular la base de la linea de abajo
-	cbnz x2,square
-
-//guardo los (x,y) del frame donde voy a querer arrancar a dibujar
-	mov x3, 0x140 //320
-	mov x4,0x5a  // 90
-
-	mov x6, 1
-	mov x2, circle_heigth //300
-circle:
-	madd x5,x4,x9,x3 //x5 = x9 +(x12*x13) calculo el inicio de la linea del cuadrado
-	lsl x5,x5,2 //multiplico por 4
-	add x0,x20,x5 //x0 = direc.base.frame + 4*(x+(y*640)) inicio demi nueva linea
-	add x1, xzr, x6 //3
-incr_width:
-	stur w12,[x0]
-	add x0,x0,4  //next pixel
-	sub x1,x1,1
-	cbnz x1,incr_width
-	add x6, x6, 1
-	sub x2,x2,1
-	add x4,x4,1 //aumento mi'y' para calcular la base de la linea de abajo
-	sub x3, x3, 1
-	cbnz x2,circle */
-
-
 	//---------------------------------------------------------------
 	// Infinite Loop 
 
