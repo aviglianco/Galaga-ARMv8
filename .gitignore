@@ -11,4 +11,7 @@ kernel8.list
 
 # GDB generated file
 .gdb_history
-memory_map.txt 
+memory_map.txt
+
+# Makefile file
+Makefile
