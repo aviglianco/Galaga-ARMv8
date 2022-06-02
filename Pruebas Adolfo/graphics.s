@@ -36,6 +36,7 @@ pintar_pixel:
         Se modifican los registros x0, x2, x3, x9 y x10
 */
 pixel:
+    mov x25, SCREEN_WIDTH
 	madd x0, x1, x25, x0 //fila.|Columnas| + columna
 	add x0,x28,x0, lsl #2 //baseArray + (fila.|Columnas| + columna)*4
 	br lr //return
