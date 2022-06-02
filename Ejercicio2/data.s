@@ -9,6 +9,7 @@
 retardo: .dword 0xffffff 
 // Colores
 .equ white,         0xFFFFFF
+.equ red,           0xFF0000
 
 // Pantalla 
 .equ SCREEN_WIDTH, 		640

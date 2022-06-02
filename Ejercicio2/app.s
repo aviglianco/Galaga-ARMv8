@@ -9,17 +9,57 @@ main:
  	mov x27, x0	// Guardamos la dirección base del framebuffer en x27
 	//---------------- CODE HERE ------------------------------------
 	
-	// color blanco
-	mov x20,white
-
+	
+	mov x0,50
+	mov x1,240
+	mov x2,100
+	mov x3,100
+	mov x4,red
+	bl rectangle
+	
+	mov x0,50 //centro en x
+	mov x1,240 //centro en y
 	mov x2,50 //radio del circulo
-	mov x3,60 //centro en x
-	mov x4,240 //centro en y
+	mov x3,white //color blanco
 	bl circulo
 
+	mov x0,160
+	mov x1,240
+	mov x2,100
+	mov x3,100
+	mov x4,white
+	bl rectangle
+
+	mov x0,160 //centro en x
+	mov x1,240 //centro en y
 	mov x2,50 //radio del circulo
-	mov x3,160 //centro en x
-	mov x4,240 //centro en y
+	mov x3,red //color blanco
+	bl circulo
+
+	mov x0,270
+	mov x1,240
+	mov x2,100
+	mov x3,100
+	mov x4,white
+	bl rectangle
+
+	mov x0,270 //centro en x
+	mov x1,240 //centro en y
+	mov x2,50 //radio del circulo
+	mov x3,xzr //color negro
+	bl circulo
+
+	mov x0,380
+	mov x1,240
+	mov x2,100
+	mov x3,100
+	mov x4,red
+	bl rectangle
+
+	mov x0,380 //centro en x
+	mov x1,240 //centro en y
+	mov x2,50 //radio del circulo
+	mov x3,xzr //color negro
 	bl circulo
 	
 
