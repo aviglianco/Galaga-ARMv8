@@ -67,17 +67,29 @@ mainzz:
 		add x11,x11,0x0101
 		bl pintar_fondo
 		
+		mov x2,5 //radio del circulo
+		add x3,x21,10 //centro en x
+		mov x4,50  //centro en y
+		movz x20, 0xD0, lsl 16
+		movk x20, 0x7131, lsl 00 //cobre
+		bl circulo //punta de la bala
+
 		mov x2,20 //ancho rect
 		mov x3,10 //alto rect
 		mov x0,x21 //centro en x
 		mov x1,50  //centro en y
+		movz x20, 0xDB, lsl 16
+		movk x20, 0xDBDB, lsl 00 //plateado
 		bl rectangle
 
-		mov x2,10 //radio del circulo
-		add x3,x21,9 //centro en x
-		mov x4,50  //centro en y
-		mov x20, white
-		bl circulo //punta de la bala
+		
+
+		mov x2,10 //ancho rect
+		mov x3,15 //alto rect
+		mov x0,272 //centro en x
+		mov x1,50  //centro en y
+		mov x20,white
+		bl rectangle
 
 		mov x2,21 //radio del circulo
 		mov x3,x21 //centro en x
@@ -102,7 +114,7 @@ mainzz:
 		bl crearDelay
 		cbnz x24,zigzag
 		
-		mov x24,1
+		mov x24,3
 	explosion:
 		add x11,x11,0x0101
 		bl pintar_fondo
@@ -113,13 +125,20 @@ mainzz:
 		mov x20, white
 		bl circulo //mantengo el otro circulo
 
-		mov x2,x24 //radio del circulo
+		add x2,x24,1 //radio del circulo
 		add x3,x21,9 //centro en x
 		mov x4,50  //centro en y
 		movz x20, 0xF9, lsl 16
-		movk x11, 0x1818, lsl 00 //color rojo
-		bl circulo //punta de la bala
-		
+		movk x20, 0x1818, lsl 00 //color rojo
+		bl circulo //explosion
+
+		sub x2,x24,2 //radio del circulo
+		add x3,x21,9 //centro en x
+		mov x4,50  //centro en y
+		movz x20, 0xF3, lsl 16
+		movk x20, 0xDA3A, lsl 00 //color amarillo
+		bl circulo //explosion interna
+
 		bl actualizarFrameBuffer 
 		
 		crearDelay_largo:
@@ -128,6 +147,7 @@ mainzz:
     		loop_crearDelay_largo:
        			subs x9, x9, 1
         		b.ne loop_crearDelay_largo
+		
 		add x24,x24,1
 		cmp x24,11
 		B.LE explosion
