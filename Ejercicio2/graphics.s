@@ -151,6 +151,79 @@ draw_player_ship:
     stur lr,[sp]
 
     ldr x17,=ship_player
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2,8
+    mov x3,25
+    ldr x4,grey
+    sub x0,x0,30
+    sub x1,x1,5
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2,2
+    mov x3,25
+    ldr x4,red
+    sub x0,x0,30
+    sub x1,x1,5
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2,8
+    mov x3,25
+    ldr x4,grey
+    add x0,x0,30
+    sub x1,x1,5
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2,2
+    mov x3,20
+    ldr x4,red
+    add x0,x0,30
+    sub x1,x1,7
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2,10
+    mov x3,35
+    ldr x4,grey
+    add x0,x0,57
+    add x1,x1,15
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2,2
+    mov x3,25
+    ldr x4,red
+    add x0,x0,57
+    add x1,x1,10
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2,10
+    mov x3,35
+    ldr x4,grey
+    sub x0,x0,57
+    add x1,x1,15
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2,2
+    mov x3,25
+    ldr x4,red
+    sub x0,x0,57
+    add x1,x1,10
+    bl rectangle
+
     ldur w0,[x17]
     ldur w1,[x17,4]
     mov x2,30
@@ -163,42 +236,6 @@ draw_player_ship:
     mov x3,15
     ldr x4,red
     sub x1,x1,5
-    bl rectangle
-
-    ldur w0,[x17]
-    ldur w1,[x17,4]
-    mov x2,10
-    mov x3,25
-    ldr x4,white
-    sub x0,x0,30
-    sub x1,x1,5
-    bl rectangle
-
-    ldur w0,[x17]
-    ldur w1,[x17,4]
-    mov x2,10
-    mov x3,25
-    ldr x4,white
-    add x0,x0,30
-    sub x1,x1,5
-    bl rectangle
-
-    ldur w0,[x17]
-    ldur w1,[x17,4]
-    mov x2,10
-    mov x3,35
-    ldr x4,white
-    add x0,x0,57
-    add x1,x1,15
-    bl rectangle
-
-    ldur w0,[x17]
-    ldur w1,[x17,4]
-    mov x2,2
-    mov x3,25
-    ldr x4,red
-    add x0,x0,57
-    add x1,x1,10
     bl rectangle
 
     ldur lr,[sp]
