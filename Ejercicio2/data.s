@@ -9,8 +9,8 @@
 buffersecundario: .skip BYTES_FRAMEBUFFER
 retardo: .dword 0xffffff 
 //arreglos de posiciones
-navea: .word  320,470
-naveen: .word 320,470
+navea: .word  320,460
+naveen: .word 320,40
 
 // Colores
 .equ white,         0xFFFFFF
