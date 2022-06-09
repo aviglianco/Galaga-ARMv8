@@ -10,7 +10,7 @@
 buffer_secundary: .skip BYTES_FRAMEBUFFER
 delay_time: .dword 0xffffff 
 //arreglos de posiciones
-ship_player: .word  320,400
+ship_player: .word  320,450
 ship_enemy1: .word 135,40
 ship_enemy2: .word 270,40
 ship_enemy3: .word 405,40
