@@ -1,5 +1,6 @@
 .include "data.s"
 .include "graphics.s"
+.include "background.s"
 
 
 .globl main
@@ -37,21 +38,21 @@ prueba:
 	bl background
 
 	ldr x22,=navea
-	ldur w1,[x22]
-	ldur w0,[x22,4]
+	ldur w0,[x22]
+	ldur w1,[x22,4]
 	mov x3,20
 	mov x2,20
 	mov x4,white
-	bl rectangle
+	bl triangle
 
 	bl actualizarFrameBuffer
 
-	ldur w1,[x22]
-	ldur w0,[x22,4]
+	ldur w0,[x22]
+	ldur w1,[x22,4]
 	//add w1,w1,1
 	add w0,w0,1
-	stur w1,[x22]
-	stur w0,[x22,4]
+	stur w0,[x22]
+	stur w1,[x22,4]
 	
 	bl crearDelay
 	b prueba
