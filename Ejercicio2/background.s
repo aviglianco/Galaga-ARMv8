@@ -50,7 +50,7 @@ background_part1:
     add x0, x19, #16
     add x1, x20, #16
     mov x2, #3
-    mov x3, red
+    ldr x3, red
     bl circulo
 
     add x0, x19, #37
@@ -74,7 +74,7 @@ background_part1:
     add x0, x19, #30
     add x1, x20, #140
     mov x2, #5
-    mov x3, red
+    ldr x3, red
     bl circulo
 
     mov x0,x19
@@ -130,7 +130,7 @@ background_part2:
     add x0, x19, #130
     add x1, x20, #150
     mov x2, #5
-    mov x3, red
+    ldr x3, red
     bl circulo
 
     ldur lr, [sp]
@@ -183,7 +183,7 @@ background_part3:
     add x0, x19, #150
     add x1, x20, #130
     mov x2, #4
-    mov x3, red
+    ldr x3, red
     bl circulo
     
     ldur lr, [sp]

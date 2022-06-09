@@ -7,19 +7,19 @@
 */
 
 .data
-buffersecundario: .skip BYTES_FRAMEBUFFER
-retardo: .dword 0xffffff 
+buffer_secundary: .skip BYTES_FRAMEBUFFER
+delay_time: .dword 0xffffff 
 //arreglos de posiciones
-navea: .word  320,400
-naveen: .word 320,40
+ship_player: .word  320,400
+ship_enemy: .word 320,40
 
 // Colores
-.equ white,         0xFFFFFF
-.equ red,           0xFF0000
-green: .word         0x66CC00
-purple: .word         0x990099
-yellow: .word         0xFFFF00
-.equ blue,         0x001933
+white: .word    0xFFFFFF
+red: .word      0xFF0000
+green: .word    0x66CC00
+purple: .word   0x990099
+yellow: .word   0xFFFF00
+blue: .word     0x001933
 
 // Pantalla 
 
