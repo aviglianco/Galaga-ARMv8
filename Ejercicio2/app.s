@@ -1,6 +1,7 @@
 .include "data.s"
 .include "graphics.s"
 .include "background.s"
+.include "logic.s"
 
 
 .globl main
@@ -10,27 +11,19 @@ main:
 	ldr x26,=buffer_secundary
  	mov x27,x0	// Guardamos la dirección base del framebuffer en x27
 	//---------------- CODE HERE ------------------------------------
-prueba:
+
+animation:
 	bl background
 
-	ldr x22,=ship_player
-	ldur w0,[x22]
-	ldur w1,[x22,4]
-	mov x2,20
-	ldr w3,white
-	bl triangle
+	bl draw_player_ship
 
 	bl frame_update
 
-	ldur w0,[x22]
-	ldur w1,[x22,4]
-	//add w1,w1,1
-	add w0,w0,1
-	stur w0,[x22]
-	stur w1,[x22,4]
+	bl update_playership
 	
 	bl delay
-	b prueba
+
+	b animation
 //---------------------------------------------------------------
 	// Infinite Loop 
 
