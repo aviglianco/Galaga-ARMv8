@@ -5,29 +5,24 @@
 .include "graphics.s"
 
 /* 
-    Dibuja un cuadrado del color del fondo.
+    En este archivo se define y pinta todo el fondo de la animación.
 
-    Parámetros:
-        
-        x0 = Posición del cuadrado horizontalmente, puede ser 0, 1, 2 o 3
-        x1 = Posición del cuadrado verticalmente, puede ser 0, 1 o 2
+    Definimos 3 patrones diferentes de estrellas, que se distribuyen y grafican
+    en la función "background".
+*/
 
-
-    Retorno:
-        Se modifican los registros 
-*/    
 background_color:
     //Save return address
 	sub sp,sp,#8
 	stur lr,[sp]
     
-    mov x2, #160 //Ancho
-    mov x3, x2 //Alto
-    mov x4, blue //Color de fondo
+    mov x2, #160
+    mov x3, x2
+    ldr x4, blue
 
-    lsr x9, x2, #1 //Mitad del lado del cuadrado
-    madd x0, x0,x2, x9 //Posicion x = pos_x * 160 + 80
-    madd x1, x1,x2, x9 //Posicion y = pos_y * 160 + 80
+    lsr x9, x2, #1
+    madd x0, x0,x2, x9
+    madd x1, x1,x2, x9
     
     bl rectangle
 
@@ -35,14 +30,6 @@ background_color:
     add sp,sp,#8
     br lr
 
-
-/* 
-    Dibuja el diseño 1 del fondo.
-
-    Parámetros:
-        x0 = Posición del diseño, puede ser 0, 1, 2 o 3
-        x1 = Posición del diseño, puede ser 0, 1, o 2
-*/
 background_part1:
     //Save return address, x19 y x20 (Para salvar la posición del diseño)
 	sub sp,sp,#24
@@ -99,13 +86,6 @@ background_part1:
     add sp,sp,#24
     br lr
 
-/* 
-    Dibuja el diseño 2 del fondo.
-
-    Parámetros:
-        x0 = Posición del diseño, puede ser 0, 1, 2 o 3
-        x1 = Posición del diseño, puede ser 0, 1, o 2
-*/
 background_part2:
     //Save return address, x19 y x20 (Para salvar la posición del diseño)
     sub sp,sp,#24
@@ -159,13 +139,6 @@ background_part2:
     add sp,sp,#24
     br lr
 
-/* 
-    Dibuja el diseño 3 del fondo.
-
-    Parámetros:
-        x0 = Posición del diseño, puede ser 0, 1, 2 o 3
-        x1 = Posición del diseño, puede ser 0, 1, o 2
-*/
 background_part3:
     //Save return address, x19 y x20 (Para salvar la posición del diseño)
 	sub sp,sp,#24
@@ -219,11 +192,6 @@ background_part3:
     add sp,sp,#24
     br lr
 
-/* 
-    Dibuja el  fondo.
-
-    Parámetros: -
-*/
 background:
     //Save return address
 	sub sp,sp,#24

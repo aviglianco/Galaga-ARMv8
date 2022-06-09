@@ -15,7 +15,7 @@ actualizarFrameBuffer:
         mov x9, SCREEN_WIDTH
         mov x10, SCREEN_HEIGH
     loop_actualizarFrameBuffer:
-		madd x12,x10,x25,x9 
+		madd x12,x10,x25,x9
         ldr w11, [x26,x12,lsl 2] // copio el color de cada pixel del frame secundario
         str w11, [x27,x12,lsl 2] // lo pego en el principal
 		sub x9,x9,1
