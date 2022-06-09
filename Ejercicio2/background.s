@@ -1,6 +1,5 @@
 .ifndef background_s
 .equ background_s, 0
-
 .include "data.s"
 .include "graphics.s"
 
@@ -51,31 +50,31 @@ background_part1:
     add x1, x20, #16
     mov x2, #3
     ldr x3, red
-    bl circulo
+    bl circle
 
     add x0, x19, #37
     add x1, x20, #48
     mov x2, #2
     ldr w3, green
-    bl circulo
+    bl circle
 
     add x0, x19, #78
     add x1, x20, #102
     mov x2, #4
     ldr w3, purple
-    bl circulo
+    bl circle
 
     add x0, x19, #150
     add x1, x20, #56
     mov x2, #3
     ldr w3, yellow
-    bl circulo
+    bl circle
 
     add x0, x19, #30
     add x1, x20, #140
     mov x2, #5
     ldr x3, red
-    bl circulo
+    bl circle
 
     mov x0,x19
     mov x1,x20
@@ -107,31 +106,31 @@ background_part2:
     add x1, x20, #16
     mov x2, #3
     ldr w3, green
-    bl circulo
+    bl circle
 
     add x0, x19, #69
     add x1, x20, #69
     mov x2, #2
     ldr w3, green
-    bl circulo
+    bl circle
 
     add x0, x19, #107
     add x1, x20, #102
     mov x2, #4
     ldr w3, yellow
-    bl circulo
+    bl circle
 
     add x0, x19, #59
     add x1, x20, #20
     mov x2, #3
     ldr w3, yellow
-    bl circulo
+    bl circle
 
     add x0, x19, #130
     add x1, x20, #150
     mov x2, #5
     ldr x3, red
-    bl circulo
+    bl circle
 
     ldur lr, [sp]
     ldur x19, [sp,#8]
@@ -160,31 +159,31 @@ background_part3:
     add x1, x20, #16
     mov x2, #3
     ldr w3, purple
-    bl circulo
+    bl circle
 
     add x0, x19, #90
     add x1, x20, #140
     mov x2, #2
     ldr w3, green
-    bl circulo
+    bl circle
 
     add x0, x19, #61
     add x1, x20, #102
     mov x2, #4
     ldr w3, purple
-    bl circulo
+    bl circle
 
     add x0, x19, #50
     add x1, x20, #20
     mov x2, #3
     ldr w3, yellow
-    bl circulo
+    bl circle
 
     add x0, x19, #150
     add x1, x20, #130
     mov x2, #4
     ldr x3, red
-    bl circulo
+    bl circle
     
     ldur lr, [sp]
     ldur x19, [sp,#8]

@@ -3,7 +3,7 @@
 .include "data.s"
 
 update_playership:
-	ldr x10,=navea
+	ldr x10,=ship_player
 	ldur w0,[x10]
 	ldur w1,[x10,4]
 	add w0,w0,1

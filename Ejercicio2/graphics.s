@@ -1,12 +1,11 @@
 .ifndef graphics_s
 .equ graphics_s,0
-
 .include "data.s"
+
 /* 
     Este archivo contiene todas las funciones relacionadas con
     los gráficos que se realizan en el programa.
 */
-
 
 /*
     Realiza los cálculos necesarios para generar un "puntero" al pixel deseado.
@@ -25,8 +24,6 @@ pixel:
 /* 
     Dibuja un rectángulo en pantalla.
 
-    Se utilizan los registros x9 y x10 como registros internos para las operaciones
-
     Parámetros:
         
         x0 = Posición x del centro
@@ -34,36 +31,31 @@ pixel:
         x2 = Ancho del rectángulo
         x3 = Alto del rectángulo
         x4 = Color del rectángulo
-    Retorno:
-        Se modifican los registros x0, x2, x3, x9 y x10
 */
 rectangle:
-	//Save return address
 	sub sp,sp,#8
 	stur lr,[sp]
 
-    //Me muevo hacia la esquina izquierda desde donde voy a pintar
-    sub x0,x0,x2,lsr #1 //Me muevo a la izquierda desde donde voy a pintar
-	sub x1,x1,x3,lsr #1 //Me muevo hacia arriba desde donde voy a pintar
+    sub x0,x0,x2,lsr #1
+	sub x1,x1,x3,lsr #1
     
-    //Obtengo el pixel en x0
 	bl pixel
 
-	mov x9,x0 //Puntero del rectangulo
+	mov x9,x0
 	rectangle_row_loop:
-		mov x10,x2 //Restablezco el ancho de la fila
+		mov x10,x2
 		rectangle_col_loop:
-			stur w4,[x9] //Seteo el color
-			add x9,x9,4 //Avanzo a la siguiente posicion
-			sub x10,x10,#1 //Resto 1 al ancho restante
-			cbnz x10, rectangle_col_loop //Si sigue habiendo ancho restante repito
-			sub x9,x9,x2, lsl #2 //Restablezco el puntero a la posicion inicial de la fila
-			add x9,x9,x25, lsl #2 //Avanzo una fila al puntero
-			sub x3,x3,#1 //Resto 1 a las filas restantes
-			cbnz x3, rectangle_row_loop //Si sigue habiendo filas restantes repito
-	ldur lr,[sp] //Recupero el return address
+			stur w4,[x9]
+			add x9,x9,4
+			sub x10,x10,#1
+			cbnz x10, rectangle_col_loop
+			sub x9,x9,x2, lsl #2
+			add x9,x9,x25, lsl #2
+			sub x3,x3,#1
+			cbnz x3, rectangle_row_loop
+	ldur lr,[sp]
 	add sp,sp,8
-    br lr //return
+    br lr
 
 /* 
     Dibuja un círculo en la pantalla.
@@ -73,69 +65,68 @@ rectangle:
         x1 = posicion del centro en y
         x2 = radio del circulo
         x3 = color del circulo
-
-    Retorno:
-        modifica los registros x0,x1,x4,x5,x6,x7,x8,x9 y x10
-            
 */
-circulo:
+circle:
             sub sp,sp,8
             stur lr,[sp]
-            //guardo la direccion de retorno
 
-            mov x4, x0 //paso x0 a x4 para poder usar x0 como parametro mas tarde
-            mov x5, x1 //paso x1 a x5 para poder usar x1 como parametro mas tarde
+            mov x4, x0
+            mov x5, x1
 
-            sub x9, x4,x2  // calcula la esquina izquierda (en x) del cuadrado a recorrer para pintar el circulo 
-            sub x10, x5,x2  // calcula la altura de la esquina izq(en y) para el cuadrado  
-            
+            sub x9, x4,x2 
+            sub x10, x5,x2
 
-            mul x6,x2,x2 //radio al cuadrado
-            add x7,x2,x2 //contador ancho del cuadrado
-            add x8,x2,x2 //contador alto del cuadrado
-    loop_c:
-            sub x0,x9,x4 //x-a
-            sub x1,x10,x5 //y-b
-            madd x0,x0,x0,xzr //(x-a)^2
-            madd x0,x1,x1,x0 //(x-a)^2 + (y-b)^2
-            cmp x0,x6 // (x- a)^2 + (y - b)^2 <= r^2
-            B.LE circle_l //si pertenece al circulo pintamos
+            mul x6,x2,x2
+            add x7,x2,x2
+            add x8,x2,x2
+    circle_loop:
+            sub x0,x9,x4
+            sub x1,x10,x5
+            madd x0,x0,x0,xzr
+            madd x0,x1,x1,x0
+            cmp x0,x6
+            B.LE circle_loop2
             sub x7,x7,1
             add x9,x9,1
-            cbnz x7,loop_c
-    movy:
-            add x10,x10,1 //aumento el y
-            sub x9,x4,x2 //vuelvo a setear x
-            sub x8,x8,1   //le quito uno a mi contador de eje y
-            add x7,x2,x2  //vuelvo a setear el ancho 
-            cbnz x8, loop_c 
-    c_ret:
+            cbnz x7,circle_loop
+    circle_mov_y:
+            add x10,x10,1
+            sub x9,x4,x2
+            sub x8,x8,1
+            add x7,x2,x2
+            cbnz x8, circle_loop
+    circle_ret:
         ldur lr,[sp]
         add sp,sp,8
         BR LR
     
-    circle_l: 
+    circle_loop2: 
             mov x0,x9
             mov x1,x10
             BL pixel
             stur w3,[x0]
-            add x9,x9,1 //me muevo al sig x
-            sub x7,x7,1  //actualizo contador del ancho
-            cbz x7, movy // si me pase de linea, reseteo al ancho de vuelta y aumento mi 'y' y vuelvo a setear x en el inicio de la linea
-            b loop_c
+            add x9,x9,1
+            sub x7,x7,1
+            cbz x7, circle_mov_y
+            b circle_loop
 
+/* 
+    Dibuja un triangulo en la pantalla.
+
+    Parámetros:
+        x0 = posicion del centro en x
+        x1 = posicion del centro en y
+        x2 = mitad de la altura del triangulo
+        x3 = color del triangulo
+*/
 triangle:
-    //Save return address
     sub sp,sp,#8
     stur lr,[sp]
-
-    // Coordenadas del centro => (x0,x1)
-    // x2 mitad del alto
-    // x3 color
-    sub x1, x1, x2 // y de la punta
-    mov x13, x0 // x de la punta/centro
-    mov x10, x2, lsl 1 // Contador del alto
-    mov x11, 1 // El ancho de la punta es 1
+    
+    sub x1, x1, x2
+    mov x13, x0
+    mov x10, x2, lsl 1
+    mov x11, 1
     triangle_row_loop:
         mov x12, x11
         mov x0, x13
@@ -151,10 +142,8 @@ triangle:
             add x1, x1, 1
             sub x13, x13, 1
             cbnz x10, triangle_row_loop
-
-    ldur lr,[sp] //Recupero el return address
+    ldur lr,[sp]
     add sp,sp,8
-    br lr //return
-
+    br lr
         
 .endif
