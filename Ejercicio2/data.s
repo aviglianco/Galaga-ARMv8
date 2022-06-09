@@ -10,6 +10,10 @@ retardo: .dword 0xffffff
 // Colores
 .equ white,         0xFFFFFF
 .equ red,           0xFF0000
+green: .word         0x66CC00
+purple: .word         0x990099
+yellow: .word         0xFFFF00
+.equ blue,         0x001933
 
 // Pantalla 
 .equ SCREEN_WIDTH, 		640
