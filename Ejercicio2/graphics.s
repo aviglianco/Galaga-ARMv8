@@ -17,7 +17,7 @@
 */
 pixel:
 	madd x0, x1, x25, x0 //fila.|Columnas| + columna
-	add x0,x27,x0, lsl #2 //baseArray + (fila.|Columnas| + columna)*4
+	add x0,x26,x0, lsl #2 //baseArray + (fila.|Columnas| + columna)*4
 	br lr //return
 
 /* 
