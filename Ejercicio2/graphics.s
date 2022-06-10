@@ -145,7 +145,11 @@ triangle:
     ldur lr,[sp]
     add sp,sp,8
     br lr
-
+/*
+Pinta la nave "aliada" usando como parametros
+los datos extraidos del arreglo ship_player definido en el arhivo
+data.s
+ */
 draw_player_ship:
     sub sp,sp,8
     stur lr,[sp]
@@ -242,23 +246,6 @@ draw_player_ship:
     add sp,sp,8
     br lr //retrun
 
-shoot:
-    ldr x17,=ship_player
-    ldr x18,=ship_enemy3
-    ldur w0,[x17]
-    ldur w1,[x18]
-    cmp x0,x1
-    B.EQ shoot_enemy1
-
-    br lr
-shoot_enemy1:
-    ldr x16,=bullet_one
-    sub x1,x1,15
-    stur w0,[x16]
-    stur w1,[x16,4] //guardo las posiciones inciales de la bala
-    mov x3,1
-    stur w3,[x16,8] //guardo que dispare la bala*/
-    br lr
 /*
 recibe como parametros las posiciones x,y (x0,x1)
 de la bala a disparar

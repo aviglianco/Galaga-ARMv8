@@ -15,11 +15,10 @@ main:
 	bl entry_ships
 animation:
 	bl background
-
-	bl draw_player_ship
-
+	
 	bl shoot
 	bl bullet_logic
+	bl draw_player_ship
 	
 	bl frame_update
 	

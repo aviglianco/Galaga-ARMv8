@@ -2,6 +2,16 @@
 .equ logic_s,0
 .include "data.s"
 .include "graphics.s"
+
+/*
+Actualiza la posicion de la nave en el eje x
+segun una variable global para decidir si va hacia la derecha o hacia la izquierda
+esta variable tendra 3 estados:
+0: la nave se mueve hacia la derecha, hasta el que el eje x = 550
+1: la nave se mueve hacia la izquierda hasta que el eje x = 130
+2: la nave se movera hacia el eje x = 320 y se cambiara al estado 3
+3: no hay movimiento
+ */
 update_playership:
 	ldr x10,=ship_player
 	ldur w0,[x10]
@@ -16,6 +26,7 @@ explosion1:
     mov w3,1
     stur w3,[x11,8]
     b next_bullet
+
 bullet_logic:
     sub sp,sp,8
     stur lr,[sp]
@@ -44,7 +55,15 @@ update_bullet:
 next_update:
     br lr
 
+/*
+Funciones para manejo de animacion
+delay: genera un delay
 
+frame_update: copia todo lo dibujado en el frammebuffer secundario
+en el buffer principal, eso lo hacemos para no perder calidad en la 
+imagen al querer pintar y actualizar la imagen muy rapidamente.
+evita el 
+ */
 delay:
         ldr x9, delay_time
     delay_loop:
