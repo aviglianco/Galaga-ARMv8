@@ -1,7 +1,7 @@
 .ifndef logic_s
 .equ logic_s,0
 .include "data.s"
-
+.include "graphics.s"
 update_playership:
 	ldr x10,=ship_player
 	ldur w0,[x10]
@@ -10,6 +10,41 @@ update_playership:
 	stur w0,[x10]
 	stur w1,[x10,4]
 	br lr
+
+explosion1:
+    ldur w3,[x11,8]
+    mov w3,1
+    stur w3,[x11,8]
+    b next_bullet
+bullet_logic:
+    sub sp,sp,8
+    stur lr,[sp]
+    ldr x11,=bullet_one
+    ldur w3,[x11,8]
+    cbz x3,next_bullet
+    ldur w1,[x11,4]
+    cmp w1,60
+    b.LE explosion1
+    ldur w0,[x11]
+    bl paint_bullet
+
+next_bullet:
+    
+    ldur lr,[sp]
+    add sp,sp,8
+    br lr //retrun
+
+update_bullet:
+    ldr x11,=bullet_one
+    ldur w3,[x11,8]
+    cbz x3,next_update
+    ldur w1,[x11,4]
+    sub w1,w1,1
+    stur w1,[x11,4]
+next_update:
+    br lr
+
+
 delay:
         ldr x9, delay_time
     delay_loop:

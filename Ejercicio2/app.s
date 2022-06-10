@@ -18,8 +18,12 @@ animation:
 
 	bl draw_player_ship
 
+	bl shoot
+	bl bullet_logic
+	
 	bl frame_update
-
+	
+	bl update_bullet
 	bl update_playership
 	
 	bl delay

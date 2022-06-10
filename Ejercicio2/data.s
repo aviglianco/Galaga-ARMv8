@@ -15,6 +15,7 @@ ship_enemy1: .word 135,40
 ship_enemy2: .word 270,40
 ship_enemy3: .word 405,40
 ship_enemy4: .word 540,40
+bullet_one:  .word 0,0,0
 
 // Colores
 white: .word    0xFFFFFF
