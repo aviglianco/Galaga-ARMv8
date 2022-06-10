@@ -21,6 +21,24 @@ update_playership:
 	stur w1,[x10,4]
 	br lr
 
+shoot:
+    ldr x17,=ship_player
+    ldr x18,=ship_enemy3
+    ldur w0,[x17]
+    ldur w4,[x17,4]
+    ldur w1,[x18]
+    cmp x0,x1
+    B.EQ shoot_enemy1
+
+    br lr
+shoot_enemy1:
+    ldr x16,=bullet_one
+    sub x4,x4,20
+    stur w0,[x16]
+    stur w4,[x16,4] //guardo las posiciones inciales de la bala
+    mov x3,1
+    stur w3,[x16,8] //guardo que dispare la bala*/
+    br lr
 explosion1:
     ldur w3,[x11,8]
     mov w3,1
