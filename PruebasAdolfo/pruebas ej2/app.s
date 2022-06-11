@@ -23,7 +23,7 @@ animation:
 	bl frame_update
 	
 	bl update_playership
-
+	
 	bl update_bullet
 	bl shoot_logic
 	

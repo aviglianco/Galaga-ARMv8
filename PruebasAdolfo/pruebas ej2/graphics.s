@@ -254,7 +254,7 @@ de la bala a dibujar
         x0 = Posición x del centro
         x1 = Posición y del centro
  */
-draw_bullet:
+paint_bullet:
     sub sp,sp,8
     stur lr,[sp]
 
@@ -279,11 +279,11 @@ bullet_draw:
     sub sp,sp,8
     stur lr,[sp]
     ldr x11,=bullet_1
-    ldur w3,[x11,8]
-    cbz x3,next_bullet
+    ldur w3,[x11,8] 
+    cbz x3,next_bullet //si la bala tiene que ser dibujada, la dibujo
     ldur w1,[x11,4]
     cmp w1,60
-    b.LE kill1
+    b.LE kill1 //si la bala alcanzo a la nave enemiga, no la dibujo y mato la nave enemiga
     ldur w0,[x11]
     bl paint_bullet
 next_bullet:
@@ -320,31 +320,31 @@ end_bullet:
 
 
 kill1:
-    mov x3,0 //no tengo que dibujar mas esta bala
-    stur w3,[x11,12]
+    mov x3,0 
+    stur w3,[x11,8] //no tengo que dibujar mas esta bala
     ldr x13,=ship_enemy1
     mov x3,1
-    stur w3,[x13,8]
+    stur w3,[x13,8] //seteo como muerto a la nave enemiga 
     b next_bullet
 kill2:
-    mov x3,0 //no tengo que dibujar mas esta bala
-    stur w3,[x11,12]
+    mov x3,0
+    stur w3,[x11,8]  //no tengo que dibujar mas esta bala
     ldr x13,=ship_enemy2
     mov x3,1
     stur w3,[x13,8]
     b next_bullet2
 kill3:
-    mov x3,0 //no tengo que dibujar mas esta bala
-    stur w3,[x11,12]
+    mov x3,0 
+    stur w3,[x11,8] //no tengo que dibujar mas esta bala
     ldr x13,=ship_enemy3
     mov x3,1
     stur w3,[x13,8]
     b next_bullet3
 kill4:
-    mov x3,0 //no tengo que dibujar mas esta bala
-    stur w3,[x11,12]
+    mov x3,0 
+    stur w3,[x11,8] //no tengo que dibujar mas esta bala
     ldr x13,=ship_enemy4
     mov x3,1
-    stur w3,[x13,8]
+    stur w3,[x13,8] 
     b end_bullet
 .endif

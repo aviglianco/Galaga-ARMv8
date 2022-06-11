@@ -7,8 +7,13 @@
 */
 
 .data
+/*
+.skip crea un arreglo de la cantidad de bytes que le digas e inicializa
+todos los elementos en 0. 
+la idea es crear un buffer secundario del mismo tamaño del principal.
+ */
 buffer_secundary: .skip BYTES_FRAMEBUFFER
-delay_time: .dword 0xffffA9
+delay_time: .dword 0xffffff
 //arreglos de posiciones
 /*
 las naves tendran este arreglo de posiciones que se organizan de la sig forma:
