@@ -46,13 +46,14 @@ bullet_3:  .word 0,0,0,0
 bullet_4:  .word 0,0,0,0
 
 // Colores
-white: .word    0xFFFFFF
-red: .word      0xFF0000
-green: .word    0x66CC00
-purple: .word   0x990099
-yellow: .word   0xFFFF00
-grey: .word     0x808080
-blue: .word     0x001933
+white: .word        0xFFFFFF
+red: .word          0xFF0000
+green: .word        0x66CC00
+purple: .word       0x990099
+yellow: .word       0xFFFF00
+grey: .word         0x808080
+blue: .word         0x001933
+light_blue: .word   0x3B83BD 
 
 // Pantalla 
 

@@ -248,6 +248,172 @@ draw_player_ship:
     br lr //retrun
 
 /*
+    Pinta la nave "enemiga" usando como parametros los datos 
+    extraidos del arreglo ship_player definido en el arhivo data.s
+
+    La nave se dibuja solo si no está muerta, es decir si el campo
+    <dead> de su arreglo asociado es cero.
+ */
+draw_enemy_ship:
+    sub sp,sp,8
+    stur lr,[sp]
+
+    ldur w18, [x17,8] // x18 = <dead>
+    cbnz w18, return
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2,20
+    mov x3,50
+    ldr x4,red
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2, 30
+    mov x3, 25
+    ldr x4, yellow
+    sub x1, x1, 25
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2, 8
+    mov x3, 10
+    ldr x4, yellow
+    sub x1, x1, 40
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2, 11
+    mov x3, 10
+    ldr x4, red
+    sub x0, x0, 10
+    sub x1, x1, 32
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2, 11
+    mov x3, 10
+    ldr x4, red
+    add x0, x0, 9
+    sub x1, x1, 32
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2, 20
+    mov x3, 10
+    ldr x4, yellow
+    add x1, x1, 15
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2, 6
+    mov x3, 10
+    ldr x4, red
+    add x1, x1, 25
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2, 4
+    mov x3, 4
+    ldr x4, yellow
+    sub x0, x0, 13
+    sub x1, x1, 35
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2, 4
+    mov x3, 4
+    ldr x4, yellow
+    add x0, x0, 13
+    sub x1, x1, 35
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2, 11
+    mov x3, 11
+    ldr x4, light_blue
+    sub x0, x0, 16
+    sub x1, x1, 7
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2, 11
+    mov x3, 11
+    ldr x4, light_blue
+    add x0, x0, 14
+    sub x1, x1, 7
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2, 11
+    mov x3, 33
+    ldr x4, light_blue
+    add x0, x0, 20
+    add x1, x1, 10
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2, 11
+    mov x3, 33
+    ldr x4, light_blue
+    sub x0, x0, 22
+    add x1, x1, 10
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2, 7
+    mov x3, 7
+    ldr x4, light_blue
+    sub x0, x0, 19
+    sub x1, x1, 30
+    bl rectangle    
+    
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2, 7
+    mov x3, 7
+    ldr x4, light_blue
+    add x0, x0, 17
+    sub x1, x1, 30
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2, 5
+    mov x3, 17
+    ldr x4, light_blue
+    add x0, x0, 22
+    sub x1, x1, 40
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov x2, 5
+    mov x3, 17
+    ldr x4, light_blue
+    sub x0, x0, 24
+    sub x1, x1, 40
+    bl rectangle
+
+    return:
+        ldur lr,[sp]
+        add sp,sp,8
+        br lr //retrun
+
+/*
 recibe como parametros las posiciones x,y (x0,x1)
 de la bala a dibujar
 
@@ -265,7 +431,9 @@ paint_bullet:
 
     ldur lr,[sp]
     add sp,sp,8
-    br lr 
+    br lr
+
+
 /* 
 Dibuja de ser necesario las balas en la pantalla,
 si la bala fue disparada => debe ser dibujada.
@@ -317,7 +485,6 @@ end_bullet:
     ldur lr,[sp]
     add sp,sp,8
     br lr //retrun
-
 
 kill1:
     mov x3,0 
