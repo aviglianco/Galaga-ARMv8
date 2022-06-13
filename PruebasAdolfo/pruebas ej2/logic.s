@@ -168,6 +168,24 @@ next_update3:
 endupdate:
     br lr
 /*FIN UPDATE BULLET */
+
+draw_all_enemy_ships:
+    sub sp,sp,8
+    stur lr,[sp]
+    
+    ldr x17,=ship_enemy1
+    bl draw_enemy_ship
+    ldr x17,=ship_enemy2
+    bl draw_enemy_ship
+    ldr x17,=ship_enemy3
+    bl draw_enemy_ship
+    ldr x17,=ship_enemy4
+    bl draw_enemy_ship
+
+    ldur lr,[sp]
+    add sp,sp,8
+    br lr //retrun
+
 /*
 Funciones para manejo de animacion
 delay: genera un delay

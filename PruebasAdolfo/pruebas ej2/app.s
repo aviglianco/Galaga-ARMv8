@@ -19,6 +19,8 @@ animation:
 	bl bullet_draw
 	
 	bl draw_player_ship
+
+	bl draw_all_enemy_ships
 	
 	bl frame_update
 	
