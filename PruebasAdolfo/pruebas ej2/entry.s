@@ -1,11 +1,19 @@
 .ifndef entry_s
 .equ entry_s,0
-.include "graphics.s"
-.include "data.s"
+
 .include "background.s"
+.include "data.s"
+.include "graphics.s"
 .include "logic.s"
 
+/*
+	En este archivo se gestiona la animación de entrada y salida de las naves
+	a la pantalla.
+*/
 
+/*
+	Se realiza la animación de entrada de las naves (tanto la del jugador como las enemigas).
+*/
 entry_ships:
 	sub sp,sp,#8
 	stur lr,[sp]
@@ -64,5 +72,6 @@ entry_ships:
 	ldur lr,[sp]
 	add sp,sp,8
 	br lr
+
 .endif
  

@@ -1,5 +1,6 @@
 .ifndef background_s
 .equ background_s, 0
+
 .include "data.s"
 .include "graphics.s"
 

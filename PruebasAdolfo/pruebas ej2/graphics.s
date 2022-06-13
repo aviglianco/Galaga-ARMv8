@@ -1,11 +1,15 @@
 .ifndef graphics_s
 .equ graphics_s,0
+
 .include "data.s"
 .include "logic.s"
 
 /* 
-    Este archivo contiene todas las funciones relacionadas con
+    Este archivo contiene el grueso de las funciones relacionadas con
     los gráficos que se realizan en el programa.
+
+    Algunas otras funciones gráficas (como la que dibuja el fondo) fueron modularizadas a
+    otros archivos para mayor claridad.
 */
 
 /*
@@ -20,7 +24,7 @@
 pixel:
 	madd x0, x1, x25, x0 //fila.|Columnas| + columna
 	add x0,x26,x0, lsl #2 //baseArray + (fila.|Columnas| + columna)*4
-	br lr //return
+	br lr
 
 /* 
     Dibuja un rectángulo en pantalla.
@@ -146,10 +150,10 @@ triangle:
     ldur lr,[sp]
     add sp,sp,8
     br lr
+
 /*
-Pinta la nave "aliada" usando como parametros
-los datos extraidos del arreglo ship_player definido en el arhivo
-data.s
+    Pinta la nave "del jugador" usando como parámetros los datos extraidos 
+    del arreglo asociado ship_player definido en el archivo data.s
  */
 draw_player_ship:
     sub sp,sp,8
@@ -411,12 +415,33 @@ draw_enemy_ship:
     return:
         ldur lr,[sp]
         add sp,sp,8
-        br lr //retrun
+        br lr
 
 /*
-recibe como parametros las posiciones x,y (x0,x1)
-de la bala a dibujar
+    Función que pinta a la vez las 4 naves enemigas en la posición especificada
+*/
+draw_all_enemy_ships:
+    sub sp,sp,8
+    stur lr,[sp]
+    
+    ldr x17,=ship_enemy1
+    bl draw_enemy_ship
+    ldr x17,=ship_enemy2
+    bl draw_enemy_ship
+    ldr x17,=ship_enemy3
+    bl draw_enemy_ship
+    ldr x17,=ship_enemy4
+    bl draw_enemy_ship
 
+    ldur lr,[sp]
+    add sp,sp,8
+    br lr
+
+/*
+    Dibuja una bala de acuerdo a la posiciones (x, y) especificadas
+    como parámetros.
+    
+    Parámetros:
         x0 = Posición x del centro
         x1 = Posición y del centro
  */
@@ -433,25 +458,24 @@ paint_bullet:
     add sp,sp,8
     br lr
 
-
 /* 
-Dibuja de ser necesario las balas en la pantalla,
-si la bala fue disparada => debe ser dibujada.
-si una bala llega a la altura de la nave enemiga =>
-deja de ser dibujada y marca a la nave enemiga como muerta.
+    Dibuja, de ser necesario las balas, en la pantalla.
+    Si la bala fue disparada => debe ser dibujada.
+    Si una bala llega a la altura de la nave enemiga =>
+    deja de ser dibujada y marca a la nave enemiga como muerta.
 
-es importante la diferenciacion entre dibujada y disparada, ya que asi
-evitamos disparar la misma bala dos veces
+    Es importante la diferenciacion entre dibujada y disparada, ya que así
+    evitamos disparar la misma bala dos veces.
 */
 bullet_draw:
     sub sp,sp,8
     stur lr,[sp]
     ldr x11,=bullet_1
     ldur w3,[x11,8] 
-    cbz x3,next_bullet //si la bala tiene que ser dibujada, la dibujo
+    cbz x3,next_bullet // Si la bala tiene que ser dibujada, la dibujamos
     ldur w1,[x11,4]
     cmp w1,60
-    b.LE kill1 //si la bala alcanzo a la nave enemiga, no la dibujo y mato la nave enemiga
+    b.LE kill1 // Si la bala alcanzo a la nave enemiga, no la dibujamos y "matamos" la nave enemiga
     ldur w0,[x11]
     bl paint_bullet
 next_bullet:
@@ -484,32 +508,32 @@ next_bullet3:
 end_bullet: 
     ldur lr,[sp]
     add sp,sp,8
-    br lr //retrun
+    br lr
 
 kill1:
     mov x3,0 
-    stur w3,[x11,8] //no tengo que dibujar mas esta bala
+    stur w3,[x11,8] // No dibujamos más esta bala
     ldr x13,=ship_enemy1
     mov x3,1
-    stur w3,[x13,8] //seteo como muerto a la nave enemiga 
+    stur w3,[x13,8] // Seteamos como muerto a la nave enemiga 
     b next_bullet
 kill2:
     mov x3,0
-    stur w3,[x11,8]  //no tengo que dibujar mas esta bala
+    stur w3,[x11,8]
     ldr x13,=ship_enemy2
     mov x3,1
     stur w3,[x13,8]
     b next_bullet2
 kill3:
     mov x3,0 
-    stur w3,[x11,8] //no tengo que dibujar mas esta bala
+    stur w3,[x11,8]
     ldr x13,=ship_enemy3
     mov x3,1
     stur w3,[x13,8]
     b next_bullet3
 kill4:
     mov x3,0 
-    stur w3,[x11,8] //no tengo que dibujar mas esta bala
+    stur w3,[x11,8]
     ldr x13,=ship_enemy4
     mov x3,1
     stur w3,[x13,8] 
