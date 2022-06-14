@@ -29,9 +29,9 @@ ship_enemy4: .word 540,120
     La estructura se organiza de la siguiente forma:
     bullet_X: <ejex>,<ejey>
 */
-bullet_1:  .word 270,210
-bullet_2:  .word 540,320
-bullet_3:  .word 405,250
+bullet_1:  .word 270,340
+bullet_2:  .word 540,180
+bullet_3:  .word 405,260
 
 // Colores
 white: .word        0xFFFFFF

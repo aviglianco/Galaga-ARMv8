@@ -15,7 +15,11 @@
     cuadro pintamos la imagen y luego la copiamos en el principal.
  */
 secondary_buffer: .skip BYTES_FRAMEBUFFER
-delay_time: .dword 0x3fffff
+/*
+    Esta constante regula la ejecución de los delay_loops que generan el retardo entre frames.
+    Puede modificarse a gusto para regular la velocidad de ejecución de la animación.
+*/
+delay_time: .dword 0xafffff
 
 // Arreglos de posiciones
 /*

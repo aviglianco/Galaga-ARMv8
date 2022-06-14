@@ -1,0 +1,2 @@
+Simulación de una partida infinita del "Galaga", un videojuego creado en 1981 donde 
+el jugador conduce una nave que debe enfrentarse y destruir a enemigos con forma de insecto.
