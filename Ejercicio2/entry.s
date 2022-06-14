@@ -85,10 +85,62 @@ exit_ship:
 		bl background
 		bl draw_player_ship
 
-		ldr x10,=ship_player
-		ldur x11,[x10,#4]
-		sub x11,x11,#2
-		stur x11,[x10,#4]
+		ldr x17,=ship_player
+		ldur w1,[x17,#4]
+		sub x1,x1,#2
+		stur w1,[x17,#4]
+
+		ldur w0,[x17]
+		sub x0,x0,15
+		add x1,x1,38
+		mov x2,18
+		mov x3,3
+		ldr x4,yellow
+		bl rectangle
+
+
+		ldur w0,[x17]
+		ldur w1,[x17,#4]
+		add x0,x0,15
+		add x1,x1,38
+		mov x2,18
+		mov x3,3
+		bl rectangle
+
+		ldur w0,[x17]
+		ldur w1,[x17,#4]
+		sub x0,x0,15
+		add x1,x1,41
+		mov x2,12
+		mov x3,3
+		bl rectangle
+
+
+		ldur w0,[x17]
+		ldur w1,[x17,#4]
+		add x0,x0,15
+		add x1,x1,41
+		mov x2,12
+		mov x3,3
+		bl rectangle
+
+		ldur w0,[x17]
+		ldur w1,[x17,#4]
+		sub x0,x0,15
+		add x1,x1,45
+		mov x2,6
+		mov x3,4
+		bl rectangle
+
+
+		ldur w0,[x17]
+		ldur w1,[x17,#4]
+		add x0,x0,15
+		add x1,x1,45
+		mov x2,6
+		mov x3,4
+		bl rectangle
+
 
 		sub x16,x16,#2
 		bl frame_update
