@@ -143,28 +143,28 @@ update_bullet:
     ldur w3,[x11,8]
     cbz x3,next_update 
     ldur w1,[x11,4]
-    sub w1,w1,1
+    sub w1,w1,2
     stur w1,[x11,4]
 next_update:
     ldr x11,=bullet_2
     ldur w3,[x11,8]
     cbz x3,next_update2 
     ldur w1,[x11,4]
-    sub w1,w1,1
+    sub w1,w1,2
     stur w1,[x11,4]
 next_update2:
     ldr x11,=bullet_3
     ldur w3,[x11,8]
     cbz x3,next_update3 
     ldur w1,[x11,4]
-    sub w1,w1,1
+    sub w1,w1,2
     stur w1,[x11,4]
 next_update3:
     ldr x11,=bullet_4
     ldur w3,[x11,8]
     cbz x3,endupdate
     ldur w1,[x11,4]
-    sub w1,w1,1
+    sub w1,w1,2
     stur w1,[x11,4]
 endupdate:
     br lr
@@ -185,7 +185,7 @@ delay:
         br lr
 
 /*
-    Copia todo lo dibujado en el frammebuffer secundario en el buffer principal.
+    Copia todo lo dibujado en el framebuffer secundario en el buffer principal.
     Eso lo hacemos para no perder calidad en la imagen al pintar y actualizar 
     la imagen muy rapidamente.
     Esta técnica nos permite eliminar el parpadeo. 
@@ -203,4 +203,40 @@ frame_update:
 		sub x10,x10,1
 		cbnz x10,frame_loop
         br lr
+
+
+/*
+    Verifica si ya terminó la escena, si terminó devuelve 0, sino devuelve 1
+*/
+    end_animation:
+        ldr w9,=ship_player
+        ldur w0,[x9,8]
+        subs x0,x0,3
+        csinc x0,x0,xzr, eq
+        
+        ldr x10,explosion_limit
+
+        ldr x9,=ship_enemy1
+        ldur w9,[x9,8]
+        cmp x9,x10
+        csinc x0,x0,xzr, ls
+
+        ldr w9,=ship_enemy2
+        ldur w9,[x9,8]
+        cmp x9,x10
+        csinc x0,x0,xzr, ls
+
+        ldr w9,=ship_enemy3
+        ldur w9,[x9,8]
+        cmp x9,x10
+        csinc x0,x0,xzr, ls
+
+        ldr w9,=ship_enemy4
+        ldur w9,[x9,8]
+        cmp x9,x10
+        csinc x0,x0,xzr, ls
+        
+
+        br lr
+
 .endif

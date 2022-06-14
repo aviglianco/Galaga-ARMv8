@@ -73,5 +73,73 @@ entry_ships:
 	add sp,sp,8
 	br lr
 
+
+/*
+	Se realiza la animación de salida de la nave del jugador, y se resetean los parametros
+*/
+exit_ship:
+	sub sp,sp,#8
+	stur lr,[sp]
+	mov x16,#350
+	exit_loop:
+		bl background
+		bl draw_player_ship
+
+		ldr x10,=ship_player
+		ldur x11,[x10,#4]
+		sub x11,x11,#2
+		stur x11,[x10,#4]
+
+		sub x16,x16,#2
+		bl frame_update
+		bl delay
+		cmp x16,xzr
+		b.ge exit_loop
+
+	mov w9,#440
+	ldr x10,=ship_player
+	stur w9,[x10,#4]
+	stur wzr,[x10,#8]
+
+	mov w9,#40
+	ldr x10,=ship_enemy1
+	stur w9,[x10,#4]
+	stur wzr,[x10,#8]
+
+	mov w9,#40
+	ldr x10,=ship_enemy2
+	stur w9,[x10,#4]
+	stur wzr,[x10,#8]
+
+	mov w9,#40
+	ldr x10,=ship_enemy3
+	stur w9,[x10,#4]
+	stur wzr,[x10,#8]
+
+	mov w9,#40
+	ldr x10,=ship_enemy4
+	stur w9,[x10,#4]
+	stur wzr,[x10,#8]
+
+	mov w9,#40
+	ldr x10,=ship_enemy4
+	stur w9,[x10,#4]
+	stur wzr,[x10,#12]
+
+	ldr x10,=bullet_1
+	stur wzr,[x10,#12]
+
+	ldr x10,=bullet_2
+	stur wzr,[x10,#12]
+
+	ldr x10,=bullet_3
+	stur wzr,[x10,#12]
+
+	ldr x10,=bullet_4
+	stur wzr,[x10,#12]
+
+	ldur lr,[sp]
+	add sp,sp,#8
+	br lr
 .endif
  

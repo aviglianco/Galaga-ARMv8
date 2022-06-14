@@ -257,13 +257,15 @@ draw_player_ship:
 
     La nave se dibuja solo si no está muerta, es decir si el campo
     <dead> de su arreglo asociado es cero.
+    En caso de estar muerta, se dibuja la explosión y se aumenta
+    de tamaño, hasta cierto limite
  */
 draw_enemy_ship:
     sub sp,sp,8
     stur lr,[sp]
 
     ldur w18, [x17,8] // x18 = <dead>
-    cbnz w18, return
+    cbnz w18, explosion
 
     ldur w0,[x17]
     ldur w1,[x17,4]
@@ -417,6 +419,28 @@ draw_enemy_ship:
         add sp,sp,8
         br lr
 
+    explosion:
+        ldur w2,[x17,8]
+        ldr w9,explosion_limit
+        cmp w2,w9
+        b.hs return
+        add w2,w2,1
+        stur w2,[x17,8]
+        ldur w0,[x17]
+        ldur w1,[x17,4]
+        ldr w3,red
+        bl circle
+
+        ldur w0,[x17]
+        ldur w1,[x17,4]
+        ldur w2,[x17,8]
+        sub w2,w2,5
+        ldr w3,yellow
+        bl circle
+
+
+        b return
+
 /*
     Función que pinta a la vez las 4 naves enemigas en la posición especificada
 */
@@ -474,7 +498,7 @@ bullet_draw:
     ldur w3,[x11,8] 
     cbz x3,next_bullet // Si la bala tiene que ser dibujada, la dibujamos
     ldur w1,[x11,4]
-    cmp w1,60
+    cmp w1,70
     b.LE kill1 // Si la bala alcanzo a la nave enemiga, no la dibujamos y "matamos" la nave enemiga
     ldur w0,[x11]
     bl paint_bullet
@@ -483,7 +507,7 @@ next_bullet:
     ldur w3,[x11,8]
     cbz x3,next_bullet2
     ldur w1,[x11,4]
-    cmp w1,60
+    cmp w1,70
     b.LE kill2
     ldur w0,[x11]
     bl paint_bullet
@@ -492,7 +516,7 @@ next_bullet2:
     ldur w3,[x11,8]
     cbz x3,next_bullet3
     ldur w1,[x11,4]
-    cmp w1,60
+    cmp w1,70
     b.LE kill3
     ldur w0,[x11]
     bl paint_bullet
@@ -501,7 +525,7 @@ next_bullet3:
     ldur w3,[x11,8]
     cbz x3,end_bullet
     ldur w1,[x11,4]
-    cmp w1,60
+    cmp w1,70
     b.LE kill4
     ldur w0,[x11]
     bl paint_bullet
@@ -514,28 +538,28 @@ kill1:
     mov x3,0 
     stur w3,[x11,8] // No dibujamos más esta bala
     ldr x13,=ship_enemy1
-    mov x3,1
+    mov x3,5
     stur w3,[x13,8] // Seteamos como muerto a la nave enemiga 
     b next_bullet
 kill2:
     mov x3,0
     stur w3,[x11,8]
     ldr x13,=ship_enemy2
-    mov x3,1
+    mov x3,5
     stur w3,[x13,8]
     b next_bullet2
 kill3:
     mov x3,0 
     stur w3,[x11,8]
     ldr x13,=ship_enemy3
-    mov x3,1
+    mov x3,5
     stur w3,[x13,8]
     b next_bullet3
 kill4:
     mov x3,0 
     stur w3,[x11,8]
     ldr x13,=ship_enemy4
-    mov x3,1
+    mov x3,5
     stur w3,[x13,8] 
     b end_bullet
 .endif

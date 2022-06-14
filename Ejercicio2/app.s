@@ -32,9 +32,9 @@ animation:
 	
 	bl delay
 
-	b animation
-//---------------------------------------------------------------
-	// Infinite Loop 
+	bl end_animation
+	cbnz x0, animation
 
-InfLoop: 
-	b InfLoop
+	bl exit_ship
+	bl entry_ships
+	b animation

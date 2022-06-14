@@ -15,7 +15,7 @@
     cuadro pintamos la imagen y luego la copiamos en el principal.
  */
 secondary_buffer: .skip BYTES_FRAMEBUFFER
-delay_time: .dword 0xffffff
+delay_time: .dword 0x3fffff
 
 // Arreglos de posiciones
 /*
@@ -56,7 +56,11 @@ purple: .word       0x990099
 yellow: .word       0xFFFF00
 grey: .word         0x808080
 blue: .word         0x001933
-light_blue: .word   0x3B83BD 
+orange: .word       0xFFA500
+light_blue: .word   0x3B83BD
+
+// Limite de la explosión
+explosion_limit: .word 40
 
 // Pantalla 
 /*
