@@ -1,0 +1,54 @@
+/* 
+Esta funcion decide si va a disparar la bala o no
+comparando el eje x de ship_player con ship_enemyX,
+en caso de tener que dispararla setea el campo <disparada> de bullet_X
+para saber que hay que pintarla,(solo se disparan una vez)
+*/
+shoot:
+    ldr x17,=ship_player
+    ldr x18,=ship_enemy1
+    ldur w0,[x17] //eje x player
+    ldur w1,[x17,4]//eje y player
+    ldur w2,[x18] //eje x enemy 3
+    cmp w0,w2
+    B.EQ shoot_enemy1
+next_ship:/*
+    ldr x18,=ship_enemy2
+    ldur w2,[x18] 
+    cmp w0,w2
+    B.EQ shoot_enemy2
+next_ship2:
+    ldr x18,=ship_enemy3
+    ldur w1,[x18] 
+    cmp w0,w1
+    B.EQ shoot_enemy3*/
+    br lr
+
+
+shoot_enemy1:
+    ldr x16,=bullet_1
+    sub w3,w1,20
+    stur w0,[x16]   
+    stur w3,[x16,4] //guardo las posiciones inciales de la bala
+    mov w4,1
+    stur w4,[x16,8] //guardo que dispare la bala
+    b next_ship
+/*   
+shoot_enemy2:
+    ldr x16,=bullet_2
+    sub w3,w1,20
+    stur w0,[x16]   
+    stur w3,[x16,4] //guardo las posiciones inciales de la bala
+    mov w4,1
+    stur w4,[x16,8] //guardo que dispare la bala
+    b next_ship2
+
+shoot_enemy3:
+    ldr x16,=bullet_3
+    sub w3,w1,20
+    stur w0,[x16]   
+    stur w3,[x16,4] //guardo las posiciones inciales de la bala
+    mov w4,1
+    stur w4,[x16,8] //guardo que dispare la bala
+    b next_ship3
+*/

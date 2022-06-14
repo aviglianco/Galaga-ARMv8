@@ -472,10 +472,33 @@ draw_all_enemy_ships:
 paint_bullet:
     sub sp,sp,8
     stur lr,[sp]
-
-    mov x2,3
+    mov x12,x0
+    mov x13,x1 //guardo el centro de la bala
+    
+    mov x2,4
     mov x3,10
     ldr x4,red
+    bl rectangle
+
+    sub x1,x13,14
+    sub x0,x12,1 //reestablezco el centro en x0, ya que rectangle modifica x0
+    mov x2,3
+    mov x3,4
+    ldr x4,light_blue
+    bl rectangle
+
+    sub x1,x13,10
+    sub x0,x12,4 //reestablezco el centro en x0, ya que rectangle modifica x0
+    mov x2,3
+    mov x3,4
+    ldr x4,light_blue
+    bl rectangle
+    
+    sub x1,x13,10
+    add x0,x12,2 //reestablezco el centro en x0, ya que rectangle modifica x0
+    mov x2,3
+    mov x3,4
+    ldr x4,light_blue
     bl rectangle
 
     ldur lr,[sp]
