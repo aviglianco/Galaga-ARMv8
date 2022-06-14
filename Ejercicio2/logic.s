@@ -86,7 +86,7 @@ shoot_enemy1:
     ldr x16,=bullet_1
     ldur w5,[x16,12]
     cbnz x5,next_ship
-    sub x3,x1,20
+    sub x3,x1,30
     stur w0,[x16]   
     stur w3,[x16,4]
     mov x4,1
@@ -99,7 +99,7 @@ shoot_enemy2:
     ldr x16,=bullet_2
     ldur w5,[x16,12]
     cbnz x5,next_ship2
-    sub x3,x1,20
+    sub x3,x1,30
     stur w0,[x16]   
     stur w3,[x16,4]
     mov x4,1
@@ -112,7 +112,7 @@ shoot_enemy3:
     ldr x16,=bullet_3
     ldur w5,[x16,12]
     cbnz x5,next_ship3
-    sub x3,x1,20
+    sub x3,x1,30
     stur w0,[x16]   
     stur w3,[x16,4]
     mov x4,1
@@ -125,7 +125,7 @@ shoot_enemy4:
     ldr x16,=bullet_4
     ldur w5,[x16,12]
     cbnz x5,next_ship4
-    sub x3,x1,20
+    sub x3,x1,30
     stur w0,[x16]   
     stur w3,[x16,4]
     mov x4,1

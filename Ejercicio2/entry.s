@@ -17,7 +17,7 @@
 entry_ships:
 	sub sp,sp,#8
 	stur lr,[sp]
-	mov x16,#30
+	mov x16,#40
 
 	entry_ships_loop:
 		bl background
@@ -80,7 +80,7 @@ entry_ships:
 exit_ship:
 	sub sp,sp,#8
 	stur lr,[sp]
-	mov x16,#350
+	mov x16,#380
 	exit_loop:
 		bl background
 		bl draw_player_ship
@@ -96,7 +96,7 @@ exit_ship:
 		cmp x16,xzr
 		b.ge exit_loop
 
-	mov w9,#440
+	mov w9,#438
 	ldr x10,=ship_player
 	stur w9,[x10,#4]
 	stur wzr,[x10,#8]

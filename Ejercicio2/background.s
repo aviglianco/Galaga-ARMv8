@@ -18,7 +18,7 @@ background_color:
     
     mov x2, #160
     mov x3, x2
-    ldr x4, blue
+    ldr x4, dark_blue
 
     lsr x9, x2, #1
     madd x0, x0,x2, x9
@@ -50,7 +50,7 @@ background_part1:
     add x0, x19, #16
     add x1, x20, #16
     mov x2, #3
-    ldr x3, red
+    ldr x3, red_light
     bl circle
 
     add x0, x19, #37
@@ -74,7 +74,7 @@ background_part1:
     add x0, x19, #30
     add x1, x20, #140
     mov x2, #5
-    ldr x3, red
+    ldr x3, red_light
     bl circle
 
     mov x0,x19
@@ -130,7 +130,7 @@ background_part2:
     add x0, x19, #130
     add x1, x20, #150
     mov x2, #5
-    ldr x3, red
+    ldr x3, red_light
     bl circle
 
     ldur lr, [sp]
@@ -183,7 +183,7 @@ background_part3:
     add x0, x19, #150
     add x1, x20, #130
     mov x2, #4
-    ldr x3, red
+    ldr x3, red_light
     bl circle
     
     ldur lr, [sp]

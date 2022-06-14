@@ -31,7 +31,7 @@ delay_time: .dword 0xafffff
     "dead" se inicializa en 0 e indica si hay que pintar o no la correspondiente nave.
     Cuando el campo <dead>==1, la nave no se pintará más.
  */
-ship_player: .word  320,400,0
+ship_player: .word  320,438,0
 ship_enemy1: .word 135,40,0
 ship_enemy2: .word 270,40,0
 ship_enemy3: .word 405,40,0
@@ -55,11 +55,13 @@ bullet_4:  .word 0,0,0,0
 // Colores
 white: .word        0xFFFFFF
 red: .word          0xFF0000
+red_light: .word    0xFF4040
 green: .word        0x66CC00
 purple: .word       0x990099
 yellow: .word       0xFFFF00
 grey: .word         0x808080
-blue: .word         0x001933
+blue: .word         0x0000FF
+dark_blue: .word    0x001933
 orange: .word       0xFFA500
 light_blue: .word   0x3B83BD
 

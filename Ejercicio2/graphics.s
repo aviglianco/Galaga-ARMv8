@@ -115,42 +115,6 @@ circle:
             cbz x7, circle_mov_y
             b circle_loop
 
-/* 
-    Dibuja un triangulo en la pantalla.
-
-    Parámetros:
-        x0 = posicion del centro en x
-        x1 = posicion del centro en y
-        x2 = mitad de la altura del triangulo
-        x3 = color del triangulo
-*/
-triangle:
-    sub sp,sp,#8
-    stur lr,[sp]
-    
-    sub x1, x1, x2
-    mov x13, x0
-    mov x10, x2, lsl 1
-    mov x11, 1
-    triangle_row_loop:
-        mov x12, x11
-        mov x0, x13
-        bl pixel
-        mov x9, x0
-        triangle_col_loop:
-            stur w3, [x9]
-            add x9, x9, 4
-            sub x12, x12, 1
-            cbnz x12, triangle_col_loop
-            add x11, x11, 2
-            sub x10, x10, 1
-            add x1, x1, 1
-            sub x13, x13, 1
-            cbnz x10, triangle_row_loop
-    ldur lr,[sp]
-    add sp,sp,8
-    br lr
-
 /*
     Pinta la nave "del jugador" usando como parámetros los datos extraidos 
     del arreglo asociado ship_player definido en el archivo data.s
@@ -163,93 +127,153 @@ draw_player_ship:
 
     ldur w0,[x17]
     ldur w1,[x17,4]
-    mov x2,8
-    mov x3,25
-    ldr x4,grey
-    sub x0,x0,30
-    sub x1,x1,5
+    mov x2,6
+    mov x3,84
+    ldr x4,white
     bl rectangle
 
     ldur w0,[x17]
     ldur w1,[x17,4]
-    mov x2,2
-    mov x3,25
-    ldr x4,red
-    sub x0,x0,30
-    sub x1,x1,5
+    mov x2,18
+    mov x3,60
+    ldr x4,white
     bl rectangle
 
     ldur w0,[x17]
     ldur w1,[x17,4]
-    mov x2,8
-    mov x3,25
-    ldr x4,grey
-    add x0,x0,30
-    sub x1,x1,5
-    bl rectangle
-
-    ldur w0,[x17]
-    ldur w1,[x17,4]
-    mov x2,2
-    mov x3,20
-    ldr x4,red
-    add x0,x0,30
-    sub x1,x1,7
-    bl rectangle
-
-    ldur w0,[x17]
-    ldur w1,[x17,4]
-    mov x2,10
-    mov x3,35
-    ldr x4,grey
-    add x0,x0,57
-    add x1,x1,15
-    bl rectangle
-
-    ldur w0,[x17]
-    ldur w1,[x17,4]
-    mov x2,2
-    mov x3,25
-    ldr x4,red
-    add x0,x0,57
-    add x1,x1,10
-    bl rectangle
-
-    ldur w0,[x17]
-    ldur w1,[x17,4]
-    mov x2,10
-    mov x3,35
-    ldr x4,grey
-    sub x0,x0,57
-    add x1,x1,15
-    bl rectangle
-
-    ldur w0,[x17]
-    ldur w1,[x17,4]
-    mov x2,2
-    mov x3,25
-    ldr x4,red
-    sub x0,x0,57
-    add x1,x1,10
-    bl rectangle
-
-    ldur w0,[x17]
-    ldur w1,[x17,4]
+    add w1,w1,12
     mov x2,30
-    ldr x3,white
-    bl triangle
+    mov x3,36
+    ldr x4,white
+    bl rectangle
 
     ldur w0,[x17]
     ldur w1,[x17,4]
-    mov x2,30
-    mov x3,15
+    mov x2,6
+    mov x3,12
     ldr x4,red
-    sub x1,x1,5
     bl rectangle
+
+    mov x18,1
+    sub x18,xzr,x18
+
+    player_loop:
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov w9,18
+    madd w0,w9,w18,w0
+    add w1,w1,15
+    mov x2,6
+    mov x3,18
+    ldr x4,white
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov w9,24
+    madd w0,w9,w18,w0
+    add w1,w1,12
+    mov x2,6
+    mov x3,36
+    ldr x4,white
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov w9,30
+    madd w0,w9,w18,w0
+    add w1,w1,27
+    mov x2,6
+    mov x3,18
+    ldr x4,white
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov w9,36
+    madd w0,w9,w18,w0
+    add w1,w1,24
+    mov x2,6
+    mov x3,36
+    ldr x4,white
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov w9,18
+    madd w0,w9,w18,w0
+    add w1,w1,3
+    mov x2,6
+    mov x3,6
+    ldr x4,blue
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov w9,24
+    madd w0,w9,w18,w0
+    add w1,w1,9
+    mov x2,6
+    mov x3,6
+    ldr x4,blue
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov w9,24
+    madd w0,w9,w18,w0
+    sub w1,w1,9
+    mov x2,6
+    mov x3,18
+    ldr x4,red
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov w9,36
+    madd w0,w9,w18,w0
+    mov x2,6
+    mov x3,18
+    ldr x4,red
+    bl rectangle
+    
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov w9,12
+    madd w0,w9,w18,w0
+    add w1,w1,21
+    mov x2,6
+    mov x3,6
+    ldr x4,red
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov w9,15
+    madd w0,w9,w18,w0
+    add w1,w1,30
+    mov x2,12
+    mov x3,12
+    ldr x4,red
+    bl rectangle
+
+    ldur w0,[x17]
+    ldur w1,[x17,4]
+    mov w9,6
+    madd w0,w9,w18,w0
+    add w1,w1,6
+    mov x2,6
+    mov x3,12
+    ldr x4,red
+    bl rectangle
+
+    add x18,x18,2
+    cmp x18,1
+    b.eq player_loop
 
     ldur lr,[sp]
     add sp,sp,8
-    br lr //retrun
+    br lr //return
 
 /*
     Pinta la nave "enemiga" usando como parametros los datos 
@@ -521,7 +545,7 @@ bullet_draw:
     ldur w3,[x11,8] 
     cbz x3,next_bullet // Si la bala tiene que ser dibujada, la dibujamos
     ldur w1,[x11,4]
-    cmp w1,70
+    cmp w1,90
     b.LE kill1 // Si la bala alcanzo a la nave enemiga, no la dibujamos y "matamos" la nave enemiga
     ldur w0,[x11]
     bl paint_bullet
@@ -530,7 +554,7 @@ next_bullet:
     ldur w3,[x11,8]
     cbz x3,next_bullet2
     ldur w1,[x11,4]
-    cmp w1,70
+    cmp w1,90
     b.LE kill2
     ldur w0,[x11]
     bl paint_bullet
@@ -539,7 +563,7 @@ next_bullet2:
     ldur w3,[x11,8]
     cbz x3,next_bullet3
     ldur w1,[x11,4]
-    cmp w1,70
+    cmp w1,90
     b.LE kill3
     ldur w0,[x11]
     bl paint_bullet
@@ -548,7 +572,7 @@ next_bullet3:
     ldur w3,[x11,8]
     cbz x3,end_bullet
     ldur w1,[x11,4]
-    cmp w1,70
+    cmp w1,90
     b.LE kill4
     ldur w0,[x11]
     bl paint_bullet
