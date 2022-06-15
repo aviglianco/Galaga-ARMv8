@@ -11,7 +11,7 @@ main:
 	mov x25,SCREEN_WIDTH
  	mov x27,x0	// Guardamos la dirección base del framebuffer en x27
 	//---------------- CODE HERE ------------------------------------
-animation:
+	
 	bl background
 	bl draw_player_ship
 	bl draw_all_enemy_ships
