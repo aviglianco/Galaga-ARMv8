@@ -31,7 +31,8 @@ delay_time: .dword 0x3fffff
     ship_enemyX <ejex>,<ejey>,<dead>
 
     "dead" se inicializa en 0 e indica si hay que pintar o no la correspondiente nave.
-    Cuando el campo <dead> > 0, la nave no se pintará más.
+    Cuando el campo <dead> > 0, la nave no se pintará más y se usará para el radio
+    de la explosión.
  */
 ship_player: .word  320,438,0
 ship_enemy1: .word 135,40,0
